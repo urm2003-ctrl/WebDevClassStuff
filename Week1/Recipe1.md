@@ -15,5 +15,10 @@
 ## Instructions
 
 1. Gather All Ingredients
+![Ingredients Image](/Week1/ingredients.webp)
 2. Heat olive oil in a medium pan over medium heat. Add garlic and stir until fragrant, 1 to 2 minutes. Add butter and stir constantly until melted.
-[!(/ingredients.webp)]
+![Garlic Image](/Week1/garlic.webp)
+3. Pour in 3 cups chicken broth; add pepper and salt. Bring to a boil. Add spaghetti and cook, stirring occasionally, until tender yet firm to the bite, about 12 minutes. Add more chicken broth if pasta starts to stick to the pan.
+![Pasta Image](/Week1/pasta.webp)
+4. Add Parmesan cheese, cream, and parsley and mix until thoroughly combined. Serve immediately.
+![Final Dish](/Week1/dish.webp)
