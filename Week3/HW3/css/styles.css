@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px 2%
+
+}
+
+nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 1%;
+    width: 82%;
+}
+
+nav li{
+    display: inline-block;
+    width: 16%;
+    margin: 0 3% 10px 0;
+}
+
+nav a {
+    display: block;
+    padding: 28px 0;
+    background-color: cornflowerblue;
+    color:black;
+    font-size: 1.25 rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+header {
+    margin: 10px 0 20px 0;
+  }
+  
+  header h1 {
+    font-size: 2.25rem;
+    margin: 0 0 5px 0;
+  }
+  
+  header h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+.ingredients,
+.instructions{
+    display: inline-block;
+    vertical-align: top;
+    height: 38rem;
+    background-color: cornflowerblue;
+    padding: 20px;
+}
+
+.ingredients{
+    width: 17%;
+    min-width: 290 px;
+    margin-right: 11%;
+}
+
+.instructions{
+    width: 61%;
+}
+
+mainh2 {
+    font-size: 2.25rem;
+    margin: 0 0 10px 0;
+}
+
+.ingredients p {
+    font-size: 1.35rem;
+    margin: 0 0 35px 0;
+}
