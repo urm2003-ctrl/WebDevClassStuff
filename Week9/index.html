@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Page</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Where Tuesday ended, plus one new empty element: the lineup list.
+         If you kept your own file from Tuesday, use that one instead and just
+         copy the <section class="lineup-wrap"> block below into it. -->
+
+    <article class="affirmation-card">
+      <header class="card-header">
+        <p class="date" id="date-label"></p>
+        <h1 class="affirmation-text" id="affirmation"></h1>
+        <p class="color-note" id="color-line"></p>
+      </header>
+
+      <p class="status" id="day-message"></p>
+
+      <section class="order">
+        <h2>Your self-care</h2>
+
+        <p class="line" id="tasks-line"></p>
+        <p class="line" id="average-line"></p>
+
+        <p class="total">
+          <span>Total time</span>
+          <strong id="total-time"></strong>
+        </p>
+
+        <p class="fine-print" id="fine-print"></p>
+      </section>
+
+      <section class="checklist">
+        <h2>Today's Checklist</h2>
+        <ul class="checklist" id="checklist"> </ul>
+        <p class="tagline" id="tagline"></p>
+      </section>
+    </article>
+
+    <script>
+      /* ---------- Tuesday's code, so nobody is stuck ----------
+         Everything below is where we finished last class. Today we replace
+         the hard-coded facts at the top with randomly chosen ones. */
+
+       const affirmations = [
+        'I am allowed to take up space.',
+        'Small steps still count.',
+        'I can do hard things gently.',
+        'Rest is part of the work.',
+        'I am becoming who I want to be.',
+        'Today does not have to be perfect.'
+      ]
+
+      const colors = [
+        'teal',
+        'sienna',
+        'purple',
+        'olive',
+        'crimson'
+      ]
+
+      const selfCareTasks = [
+        ' Drink a glass of water',
+        ' Step outside for fresh air',
+        ' Stretch your shoulders',
+        ' Write one thing you are grateful for',
+        ' Text someone you love',
+        ' Tidy one small space',
+        ' Put your phone in another room'
+      ]
+
+            /* =========================================================
+         2. PICKING ONE AT RANDOM
+         Math.random() gives a float from 0 up to (not including) 1.
+         Multiply by the length, floor it, and you have a valid index.
+         ========================================================= */
+
+      function pickRandom(array) {
+        return array[Math.floor(Math.random() * array.length)]
+      }
+
+      // whole number from min to max, including both
+      function randomBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      }
+
+      /* =========================================================
+         3. A DIFFERENT SHOW EVERY RELOAD
+         Same variable names as Tuesday -- only the right-hand side
+         of each line has changed.
+         ========================================================= */
+      const affirmation = pickRandom(affirmations)
+      const color = pickRandom(colors)
+
+      // today's date, just for the label at the top
+      const today = new Date()
+
+      const dateLabel = today.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+      })
+
+      document.body.style.setProperty('--accent', color)
+
+      const taskCount = randomBetween(3, 6) 
+
+      // ternary
+      const timeOfDay = today.getHours() < 12 ? 'this morning' : 'today'
+
+
+     
+      /* =========================================================
+         6. A FOR LOOP OVER THE LINEUP
+         ========================================================= */
+      const start = randomBetween(0, selfCareTasks.length - 1)
+
+      let checklistHTML = ''
+      let totalMinutes = 0
+
+      for (let i = 0; i < taskCount; i++) {
+        const task = selfCareTasks[(start + i) % selfCareTasks.length]
+        const minutes = randomBetween(1, 8)
+        totalMinutes += minutes 
+
+        // every other row striped
+        const stripe = i % 2 === 1 ? 'stripe' : ''
+
+        checklistHTML += `<li class="${stripe}"><span class="time">${minutes} min</span>${task}</li>`
+      }
+
+      const averageMinutes = totalMinutes / taskCount
+
+      // booleans from comparisons
+      const isGentleDay = totalMinutes < 10
+      const isBigDay = totalMinutes > 25
+
+
+      let dayMessage
+
+      if (isBigDay) {
+        dayMessage = 'A full day of looking after yourself'
+      } else if (isGentleDay) {
+        dayMessage = "A gentle day, and that's enough"
+      } else {
+        dayMessage = 'A steady, balanced day'
+      }
+
+
+      const tagline = `${taskCount} small things for you ${timeOfDay}.`
+      /* =========================================================
+         7. ON THE PAGE
+         ========================================================= */
+
+      document.querySelector('#date-label').textContent = dateLabel
+      document.querySelector('#affirmation').textContent = affirmation
+      document.querySelector('#color-line').textContent = `Your color: ${color}`
+      document.querySelector('#day-message').textContent = dayMessage
+
+      document.querySelector('#tasks-line').innerHTML =
+        `<span>Tasks</span><span>${taskCount}</span>`
+
+      document.querySelector('#average-line').innerHTML =
+        `<span>Average per task</span><span>${averageMinutes.toFixed(2)} min</span>`
+
+
+      document.querySelector('#total-time').textContent = `${totalMinutes} minutes`
+      document.querySelector('#fine-print').textContent =
+        `${taskCount} tasks, about ${averageMinutes.toFixed(2)} minutes each.`
+
+      document.querySelector('#checklist').innerHTML = checklistHTML
+      document.querySelector('#tagline').textContent = tagline
+
+      console.log({ 
+        affirmation, 
+        color, 
+        taskCount, 
+        totalMinutes, 
+        averageMinutes })
+    </script>
+
+  </body>
+</html>
